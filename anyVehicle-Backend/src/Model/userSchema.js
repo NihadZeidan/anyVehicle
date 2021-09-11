@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   accessControl: {
     type: String,
-    default: "customer",
     enum: ["admin", "customer"],
     required: true,
   },

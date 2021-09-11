@@ -1,3 +1,6 @@
+import React, { useContext, useEffect } from "react";
+
+
 // Import all the needed components and packages
 import { useHistory } from "react-router-dom";
 import superAgent from "superagent";
@@ -8,13 +11,10 @@ import { Typography } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
-import { useEffect } from "react";
-
 // Import styles
 import useStyles from "../../Styles/registerStyles";
 
 // my context
-import { useContext } from "react";
 import { myContext } from "../../context/context";
 
 function Register() {
@@ -67,7 +67,7 @@ function Register() {
 
   //   Display
   return (
-    <>
+    <React.Fragment>
       <div className={classes.root}>
         <Paper elevation={15}>
           <form onSubmit={handelSubmit} className={classes.form}>
@@ -122,7 +122,7 @@ function Register() {
           </form>
         </Paper>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 export default Register;
