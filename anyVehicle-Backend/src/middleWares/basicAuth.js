@@ -4,13 +4,13 @@ const userSchema = require("../Model/userSchema");
 
 const basicAuth = async function (req, res, next) {
   try {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
 
-    req.user = await userSchema.basicAuth(userName, password);
+    req.user = await userSchema.basicAuth(email, password);
 
     next();
   } catch (e) {
-    next("Invalid Username or Password");
+    next("Invalid Email or Password");
   }
 };
 
