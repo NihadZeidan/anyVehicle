@@ -3,6 +3,8 @@
 const express = require("express");
 const router = express.Router();
 
+const mongoose = require("mongoose");
+
 const basicAuth = require("../middleWares/basicAuth");
 const bearerAuth = require("../middleWares/bearerAuth");
 
@@ -36,24 +38,20 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Logout by clearing the token form cookies
-// router.get("/logout", (req, res) => {
-//   res.clearCookie("token");
-
-//   res.send("Logged out successfully");
-// });
-
 // Send Maintenance Request
 router.post("/send-request", bearerAuth, async (req, res) => {
   // Taking the user id form the request object
   const relatedUserID = req.user._id;
-  const { requestTitle, requestDetails, requestDate } = req.body;
+  const { requestTitle, requestDetails, urgent, userLocation, carModel } =
+    req.body;
 
   try {
     let sendRequestToDataBase = await requestSchema({
       requestTitle,
       requestDetails,
-      requestDate,
+      urgent: JSON.parse(urgent),
+      userLocation,
+      carModel,
       relatedUser: JSON.stringify(relatedUserID),
     }).save();
 
@@ -105,9 +103,13 @@ router.post("/edit-request", bearerAuth, async (req, res) => {
     //   To check if the user is admin or not
     if (userCapabilities.includes("editRequest")) {
       const { requestID, newStatus } = req.body;
+      console.log(requestID);
+      console.log(typeof newStatus);
+      const id = mongoose.Types.ObjectId(requestID);
+      console.log("mongoose.Types.ObjectId", id);
 
-      let findRequestAndUpdate = await requestSchema.findByIdAndUpdate(
-        { _id: requestID },
+      let findRequestAndUpdate = await requestSchema.findOneAndUpdate(
+        { _id: id },
         { requestStatus: newStatus }
       );
       res.status(200).json(findRequestAndUpdate);

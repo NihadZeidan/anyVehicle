@@ -1,5 +1,5 @@
 // my context
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { myContext } from "../../context/context";
 
 function Home() {

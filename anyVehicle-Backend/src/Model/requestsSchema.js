@@ -8,7 +8,9 @@ const requestSchema = new mongoose.Schema({
   requestTitle: { type: String, required: true },
   requestStatus: { type: String, default: "Pending" },
   requestDetails: { type: String, required: true },
-  requestDate: { type: String, required: true },
+  urgent: { type: Boolean, default: false },
+  carModel: { type: String, required: true },
+  userLocation: { type: String, required: true },
   relatedUser: { type: String, required: true },
 });
 

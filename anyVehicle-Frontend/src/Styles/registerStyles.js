@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
   label: {
     marginTop: 10,
   },
+  checkbox: {
+    textAlign: "left",
+    justifyContent: "left",
+  },
 }));
 
 export default useStyles;

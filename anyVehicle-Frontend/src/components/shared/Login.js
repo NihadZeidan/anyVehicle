@@ -1,12 +1,14 @@
+import React, { useContext, useEffect } from "react";
+
 import Paper from "@material-ui/core/Paper";
 import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 import reactCookie from "react-cookies";
 import superAgent from "superagent";
 
 // my context
-import React, { useContext, useEffect } from "react";
 import { myContext } from "../../context/context";
 
 // Login form styles
@@ -21,8 +23,10 @@ function Login() {
   useEffect(() => {
     setPassword("");
     setEmail("");
+    reactCookie.remove("token");
   }, []);
 
+  const history = useHistory();
   const classes = useStyles();
 
   //   To handle login submit
@@ -40,11 +44,10 @@ function Login() {
       .set({ "Content-Type": "application/json", Accept: "application/json" })
       .send(JSON.stringify(data))
       .then((response) => {
-        e.target.reset();
-
         setUser(response.body.user);
         reactCookie.save("token", response.body.token);
-        // history.push("/");
+        e.target.reset();
+        history.push("/");
       })
       .catch((e) => console.error(e));
   };
