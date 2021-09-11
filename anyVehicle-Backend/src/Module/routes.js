@@ -15,8 +15,7 @@ const requestSchema = require("../Model/requestsSchema");
 router.post("/login", basicAuth, (req, res) => {
   const user = req.user;
   const token = req.user.token;
-  res.cookie("token", token);
-  res.status(200).json(user);
+  res.status(200).json({ user, token });
 });
 
 // Register (saving the user to the DataBase)
@@ -38,11 +37,11 @@ router.post("/register", async (req, res) => {
 });
 
 // Logout by clearing the token form cookies
-router.get("/logout", (req, res) => {
-  res.clearCookie("token");
+// router.get("/logout", (req, res) => {
+//   res.clearCookie("token");
 
-  res.send("Logged out successfully");
-});
+//   res.send("Logged out successfully");
+// });
 
 // Send Maintenance Request
 router.post("/send-request", bearerAuth, async (req, res) => {

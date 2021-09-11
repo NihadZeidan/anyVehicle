@@ -52,16 +52,16 @@ userSchema.pre("save", async function () {
   }
 });
 
-// Basic Authentication (USERNAME and PASSWORD)
-userSchema.statics.basicAuth = async function (userName, password) {
+// Basic Authentication (EMAIL and PASSWORD)
+userSchema.statics.basicAuth = async function (email, password) {
   try {
-    const user = await this.findOne({ userName });
+    const user = await this.findOne({ email });
     const validate = await bcrypt.compare(password, user.password);
 
     if (validate) {
       return user;
     } else {
-      throw new Error("Invalid Username or Password");
+      throw new Error("Invalid Email or Password");
     }
   } catch (e) {
     throw new Error(e.message);

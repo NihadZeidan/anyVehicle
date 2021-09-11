@@ -1,6 +1,6 @@
 "use strict";
 
-// Creating Express Server
+// Requiring needed packages
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -16,15 +16,15 @@ const handleInternalServerError = require("./errorHandlers/500");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// To Allow Communication (Resource Sharing) With The Front End App
+app.use(cors());
+
 // Use Server Routes
 app.use(Routes);
 
 // Use Error Handlers
 app.use(handleInternalServerError);
 app.use("*", handleNotFound);
-
-// To Allow Communication (Resource Sharing) With The Front End App
-app.use(cors());
 
 // Starting the server
 function start(port) {
