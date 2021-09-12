@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { myContext } from "../../context/context";
 import superAgent from "superagent";
-import reactCookie from "react-cookies";
 
 // Accordion Components
 import {
@@ -17,20 +16,14 @@ import useStyles from "../../Styles/myRequestsStyles";
 function MyRequests() {
   const classes = useStyles();
 
-  //   To toggle the card
-  // const [expanded, setExpanded] = React.useState(false);
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
-
-  const { userRequests, setUserRequests } = useContext(myContext);
+  const { userRequests, setUserRequests, token } = useContext(myContext);
 
   // When component did mount get all user requests from the server
   useEffect(() => {
     superAgent
       .get("http://localhost:3030/all-user-requests")
       //   User must be authorized
-      .set({ Authorization: `Bearer ${reactCookie.load("token")}` })
+      .set({ Authorization: `Bearer ${token}` })
       .then((response) => {
         setUserRequests(response.body);
       })

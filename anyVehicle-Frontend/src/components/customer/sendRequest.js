@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import superAgent from "superagent";
 import { useHistory } from "react-router-dom";
-import reactCookie from "react-cookies";
 
 // Import styles
 import useStyles from "../../Styles/registerStyles";
@@ -35,6 +34,7 @@ function SendRequest() {
     setUserLocation,
     carModel,
     setCarModel,
+    token,
   } = useContext(myContext);
 
   //   Handle sending maintenance request
@@ -53,7 +53,7 @@ function SendRequest() {
     superAgent
       .post("http://localhost:3030/send-request")
       .set({
-        Authorization: `Bearer ${reactCookie.load("token")}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         Accept: "application/json",
       })

@@ -5,7 +5,6 @@ import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
-import reactCookie from "react-cookies";
 import superAgent from "superagent";
 
 // my context
@@ -16,14 +15,14 @@ import useStyles from "../../Styles/loginStyles";
 
 function Login() {
   //   Use the global state from my context
-  const { setUser, password, setPassword, email, setEmail } =
+  const { token, setToken, setUser, password, setPassword, email, setEmail } =
     useContext(myContext);
 
   // On component did mount clear the state
   useEffect(() => {
     setPassword("");
     setEmail("");
-    reactCookie.remove("token");
+    setToken(null);
   }, []);
 
   const history = useHistory();
@@ -44,10 +43,12 @@ function Login() {
       .set({ "Content-Type": "application/json", Accept: "application/json" })
       .send(JSON.stringify(data))
       .then((response) => {
+        // Save the user and the token
         setUser(response.body.user);
-        reactCookie.save("token", response.body.token);
+        setToken(response.body.token);
+
         e.target.reset();
-        history.push("/");
+        history.replace("/");
       })
       .catch((e) => console.error(e));
   };

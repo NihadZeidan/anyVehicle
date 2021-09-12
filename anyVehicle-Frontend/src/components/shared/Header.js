@@ -2,47 +2,62 @@ import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { myContext } from "../../context/context";
 
+// import header styles
 import useStyles from "../../Styles/headerStyles.js";
-import reactCookie from "react-cookies";
 
 function Header() {
   const classes = useStyles();
-  const { setUser } = useContext(myContext);
+  const { setUser, token, setToken } = useContext(myContext);
 
   // To navigate between components
   const history = useHistory();
 
-  // To check if the user logged in or not (by checking the token)
-  let isTheUserLoggedIn = reactCookie.load("token");
-
   // To logout, clear the token and return the user state to empty
   const handleLogout = () => {
-    reactCookie.remove("token");
     setUser({});
+
     // To refresh the <header /> whenever the user changed (logged-in or logged-out)
-    isTheUserLoggedIn = reactCookie.load("token");
+    setToken(null);
+    // go back to login page
     history.replace("/login");
   };
 
   return (
-    <header>
-      <img src="assets/logo.png" alt="" />
-      <ul className={classes.link}>
+    <header className={classes.header}>
+      <img src="assets/logo.png" alt="logo" className={classes.img} />
+      <ul className={classes.list}>
         {/* Check if the user logged-in ? */}
-        {!isTheUserLoggedIn ? (
+        {token ? (
           <React.Fragment>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/" className={classes.link}>
+              Home
+            </Link>
+
+            <Link to="/chart" className={classes.link}>
+              Insights
+            </Link>
+            <Link to="/editReq" className={classes.link}>
+              Edit Requests
+            </Link>
+
+            <Link to="/allMyReq" className={classes.link}>
+              My Requests
+            </Link>
+            <Link to="/sendReq" className={classes.link}>
+              Send Maintenance Request
+            </Link>
+            <div onClick={handleLogout} className={classes.link}>
+              Logout
+            </div>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Link to="/">Home</Link>
-            <Link to="/allMyReq">My Requests</Link>
-            <Link to="/sendReq">Send Maintenance Request</Link>
-
-            <Link to="/chart">Insights</Link>
-            <Link to="/editReq">Edit Requests</Link>
-            <div onClick={handleLogout}>Logout</div>
+            <Link to="/login" className={classes.link}>
+              Login
+            </Link>
+            <Link to="/register" className={classes.link}>
+              Register
+            </Link>
           </React.Fragment>
         )}
       </ul>
