@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import { myContext } from "../../context/context";
 import useStyles from "../../Styles/homeStyles";
+import reactCookie from "react-cookies";
 
 import {
   List,
@@ -14,11 +15,11 @@ import {
 } from "@material-ui/core";
 
 function Home() {
-  const { user, token } = useContext(myContext);
+  const { user } = useContext(myContext);
   const classes = useStyles();
   return (
     <div>
-      {token ? (
+      {reactCookie.load("token") ? (
         <Typography className={classes.welcome}>
           {" "}
           Welcome {user.userName}
@@ -44,7 +45,7 @@ function Home() {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="Brunch this weekend?"
+            primary="Do not hastate to try their services !!"
             secondary={
               <React.Fragment>
                 <Typography
@@ -53,9 +54,9 @@ function Home() {
                   className={classes.inline}
                   color="textPrimary"
                 >
-                  Ali Connors
+                  Ali Connors &nbsp;
                 </Typography>
-                I've got a very good service recently !
+                <p> I've got a very good service recently ! </p>
               </React.Fragment>
             }
           />
@@ -66,7 +67,7 @@ function Home() {
             <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="Summer BBQ"
+            primary="Simply AWESOME SERVICE !"
             secondary={
               <React.Fragment>
                 <Typography
@@ -75,10 +76,13 @@ function Home() {
                   className={classes.inline}
                   color="textPrimary"
                 >
-                  to Scott, Alex, Jennifer
+                  Scott Jennifer &nbsp;
                 </Typography>
-                After two months of searching, finally I found who can fix old
-                beloved cars !
+                <p>
+                  {" "}
+                  After two months of searching, finally I found who can fix old
+                  beloved cars !
+                </p>
               </React.Fragment>
             }
           />
@@ -89,7 +93,7 @@ function Home() {
             <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary="Oui Oui"
+            primary="The best..."
             secondary={
               <React.Fragment>
                 <Typography
@@ -98,9 +102,11 @@ function Home() {
                   className={classes.inline}
                   color="textPrimary"
                 >
-                  Sandra Adams
+                  Sandra Adams &nbsp;
                 </Typography>
-                HIGHLY RECOMMENDED! excellent service with reasonable price
+                <p>
+                  HIGHLY RECOMMENDED! excellent service with reasonable price
+                </p>
               </React.Fragment>
             }
           />

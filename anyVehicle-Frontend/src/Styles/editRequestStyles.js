@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginTop: "5%",
     display: "flex",
+    flexWrap: "wrap",
     flexDirection: "row",
     alignItems: "center",
   },
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     width: "40%",
+    margin: "1%",
     marginLeft: "auto",
     marginRight: "auto",
     display: "inline-block",

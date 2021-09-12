@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 
-
 // Import all the needed components and packages
 import { useHistory } from "react-router-dom";
 import superAgent from "superagent";
@@ -38,7 +37,7 @@ function Register() {
   useEffect(() => {
     setPassword("");
     setEmail("");
-    setAccessControl("");
+    setAccessControl(null);
     setUserName("");
   }, []);
 

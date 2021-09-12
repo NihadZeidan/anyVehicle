@@ -2,16 +2,17 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "90%",
+    width: "80%",
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: "5%",
   },
   root: {
     fontSize: ".8em",
-    display: "flex",
-    width: "20%",
+    width: "30%",
     backgroundColor: "#F2841F",
     margin: "1%",
     marginLeft: "auto",

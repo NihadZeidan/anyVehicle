@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import superAgent from "superagent";
 import "../../Styles/App.css";
+import reactCookie from "react-cookies";
 
 // Using Recharts package to draw chart
 import {
@@ -15,13 +16,13 @@ import {
 import { myContext } from "../../context/context";
 
 function Chart() {
-  const { setAllRequests, allRequests, token } = useContext(myContext);
+  const { setAllRequests, allRequests } = useContext(myContext);
   // Get all the requests once the component did mount
   useEffect(() => {
     superAgent
       .get("http://localhost:3030/all-requests")
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${reactCookie.load("token")}`,
       })
       .then((response) => {
         console.log(response.body);

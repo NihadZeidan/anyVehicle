@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   welcome: {
     textAlign: "center",
     fontSize: "1em",
+    color: "#FFFFFF",
   },
   intro: {
     color: "#FFFFFF",
