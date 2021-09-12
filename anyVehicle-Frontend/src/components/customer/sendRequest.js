@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import reactCookie from "react-cookies";
 import {
   InputLabel,
   Select,
@@ -34,7 +35,6 @@ function SendRequest() {
     setUserLocation,
     carModel,
     setCarModel,
-    token,
   } = useContext(myContext);
 
   //   Handle sending maintenance request
@@ -53,14 +53,14 @@ function SendRequest() {
     superAgent
       .post("http://localhost:3030/send-request")
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${reactCookie.load("token")}`,
         "Content-Type": "application/json",
         Accept: "application/json",
       })
       .send(JSON.stringify(data))
       .then((response) => {
         e.target.reset();
-        history.push("/");
+        history.replace("/allMyReq");
       })
       .catch((e) => console.error(e));
   };
@@ -96,7 +96,6 @@ function SendRequest() {
           <Select
             className={classes.input}
             native
-            variant="outlined"
             name="location"
             value={userLocation}
             onChange={(event) => setUserLocation(event.target.value)}
@@ -118,7 +117,6 @@ function SendRequest() {
           <Select
             className={classes.input}
             native
-            variant="outlined"
             name="carModel"
             value={carModel}
             onChange={(event) => setCarModel(event.target.value)}

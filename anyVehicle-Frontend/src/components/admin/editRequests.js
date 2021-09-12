@@ -14,9 +14,10 @@ import {
 import superAgent from "superagent";
 import { myContext } from "../../context/context";
 import useStyles from "../../Styles/editRequestStyles";
+import reactCookie from "react-cookies";
 
 function EditRequests() {
-  const { newStatus, setNewStatus, allRequests, setAllRequests, token } =
+  const { newStatus, setNewStatus, allRequests, setAllRequests } =
     useContext(myContext);
 
   // this variable to prevent render useEffect at the first initialization
@@ -27,7 +28,7 @@ function EditRequests() {
     superAgent
       .get("http://localhost:3030/all-requests")
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${reactCookie.load("token")}`,
       })
       .then((response) => {
         console.log(response.body);
@@ -43,7 +44,7 @@ function EditRequests() {
       superAgent
         .post("http://localhost:3030/edit-request")
         .set({
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${reactCookie.load("token")}`,
           "Content-Type": "application/json",
           Accept: "application/json",
         })
