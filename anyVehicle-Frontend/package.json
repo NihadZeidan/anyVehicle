@@ -1,6 +1,6 @@
 {
   "name": "any-vehicle",
-  "homepage": "./", 
+  "homepage": "https://my-app.netlify.app", 
   "version": "0.1.0",
   "private": true,
   "main": "src/index.js",
