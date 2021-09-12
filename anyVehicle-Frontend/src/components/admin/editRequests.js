@@ -26,7 +26,7 @@ function EditRequests() {
   // When component did mount get all the requests from the Database
   useEffect(() => {
     superAgent
-      .get("http://localhost:3030/all-requests")
+      .get("https://any-vehicle-backend.herokuapp.com/all-requests")
       .set({
         Authorization: `Bearer ${reactCookie.load("token")}`,
       })
@@ -42,7 +42,7 @@ function EditRequests() {
     // This if statement to prevent sending the request in the first component initialization
     if (isMounted.current) {
       superAgent
-        .post("http://localhost:3030/edit-request")
+        .post("https://any-vehicle-backend.herokuapp.com/edit-request")
         .set({
           Authorization: `Bearer ${reactCookie.load("token")}`,
           "Content-Type": "application/json",

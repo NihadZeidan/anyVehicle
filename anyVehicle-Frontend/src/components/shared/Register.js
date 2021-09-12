@@ -1,14 +1,16 @@
 import React, { useContext, useEffect } from "react";
-
-// Import all the needed components and packages
 import { useHistory } from "react-router-dom";
 import superAgent from "superagent";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import { Typography } from "@material-ui/core";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
+
+// Import all the needed components
+import {
+  Typography,
+  Paper,
+  TextField,
+  Button,
+  Select,
+  InputLabel,
+} from "@material-ui/core";
 
 // Import styles
 import useStyles from "../../Styles/registerStyles";
@@ -54,7 +56,7 @@ function Register() {
 
     // Sending the POST request to the server
     superAgent
-      .post("http://localhost:3030/register")
+      .post("https://any-vehicle-backend.herokuapp.com/register")
       .set({ "Content-Type": "application/json", Accept: "application/json" })
       .send(JSON.stringify(data))
       .then((response) => {

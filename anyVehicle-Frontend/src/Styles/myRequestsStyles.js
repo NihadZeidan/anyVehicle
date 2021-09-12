@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "1%",
     marginLeft: "auto",
     marginRight: "auto",
+    padding: 5,
   },
 }));
 

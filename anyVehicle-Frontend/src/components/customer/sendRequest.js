@@ -51,7 +51,7 @@ function SendRequest() {
 
     // Sending to the server
     superAgent
-      .post("http://localhost:3030/send-request")
+      .post("https://any-vehicle-backend.herokuapp.com/send-request")
       .set({
         Authorization: `Bearer ${reactCookie.load("token")}`,
         "Content-Type": "application/json",
@@ -60,6 +60,14 @@ function SendRequest() {
       .send(JSON.stringify(data))
       .then((response) => {
         e.target.reset();
+
+        // Clear all states
+        setReqTitle("");
+        setReqDescription("");
+        setUserLocation("");
+        setCarModel("");
+        setUrgent(false);
+        // Navigate to all requests
         history.replace("/allMyReq");
       })
       .catch((e) => console.error(e));
@@ -136,8 +144,12 @@ function SendRequest() {
             value={urgent}
             label="Urgent?"
             labelPlacement="start"
-            control={<Checkbox color="primary" />}
-            onChange={(event) => setUrgent(!urgent)}
+            control={
+              <Checkbox
+                color="primary"
+                onChange={(event) => setUrgent(!urgent)}
+              />
+            }
           />
 
           <Button variant="outlined" type="submit" className={classes.btn}>

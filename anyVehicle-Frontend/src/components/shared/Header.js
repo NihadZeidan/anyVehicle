@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { myContext } from "../../context/context";
 import reactCookie from "react-cookies";
@@ -22,8 +22,6 @@ function Header() {
     // go back to login page
     history.replace("/login");
   };
-
-  console.log("uasruasufuusausfasjfklasjflkasf", user.accessControl);
 
   if (user.accessControl === "admin") {
     return (

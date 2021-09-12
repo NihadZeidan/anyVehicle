@@ -4,12 +4,7 @@ import superAgent from "superagent";
 import reactCookie from "react-cookies";
 
 // Accordion Components
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-} from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 
 // Styles
 import useStyles from "../../Styles/myRequestsStyles";
@@ -22,7 +17,7 @@ function MyRequests() {
   // When component did mount get all user requests from the server
   useEffect(() => {
     superAgent
-      .get("http://localhost:3030/all-user-requests")
+      .get("https://any-vehicle-backend.herokuapp.com/all-user-requests")
       //   User must be authorized
       .set({ Authorization: `Bearer ${reactCookie.load("token")}` })
       .then((response) => {
@@ -37,36 +32,29 @@ function MyRequests() {
       {userRequests.map((req, idx) => {
         return (
           <React.Fragment>
-            <Accordion className={classes.root}>
-              <AccordionSummary
-                aria-controls="panel1a-content"
-                id="panel1a-header"
+            <Card className={classes.root}>
+              <Typography
+                variant="inherit"
+                color="textSecondary"
+                component="h2"
               >
-                <Typography
-                  variant="inherit"
-                  color="textSecondary"
-                  component="h2"
-                >
-                  Status: {req.requestStatus}
-                  <br />
-                  Car Model: {req.carModel}
-                  <br />
-                  Location: {req.userLocation}
-                  <hr />
-                </Typography>
+                Status: {req.requestStatus}
+                <br />
+                Car Model: {req.carModel}
+                <br />
+                Location: {req.userLocation}
+                <hr />
+              </Typography>
 
-                <AccordionDetails>
-                  <Typography
-                    variant="inherit"
-                    color="textSecondary"
-                    component="h2"
-                  >
-                    Request Description: &nbsp;
-                    {req.requestDetails}
-                  </Typography>
-                </AccordionDetails>
-              </AccordionSummary>
-            </Accordion>
+              <Typography
+                variant="inherit"
+                color="textSecondary"
+                component="h2"
+              >
+                Request Description: &nbsp;
+                {req.requestDetails}
+              </Typography>
+            </Card>
           </React.Fragment>
         );
       })}

@@ -20,7 +20,7 @@ function Chart() {
   // Get all the requests once the component did mount
   useEffect(() => {
     superAgent
-      .get("http://localhost:3030/all-requests")
+      .get("https://any-vehicle-backend.herokuapp.com/all-requests")
       .set({
         Authorization: `Bearer ${reactCookie.load("token")}`,
       })

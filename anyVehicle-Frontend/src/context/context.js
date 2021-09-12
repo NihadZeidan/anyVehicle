@@ -7,7 +7,6 @@ export const myContext = createContext();
 export default function ContextProvider(props) {
   // To handle user Login and Register
   const [user, setUser] = useState({});
-  // const [token, setToken] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");

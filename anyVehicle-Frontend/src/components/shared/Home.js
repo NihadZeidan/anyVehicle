@@ -16,7 +16,11 @@ import {
 
 function Home() {
   const { user } = useContext(myContext);
+
+  // Styles
   const classes = useStyles();
+
+  // Display
   return (
     <div>
       {reactCookie.load("token") ? (
